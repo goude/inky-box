@@ -2,9 +2,12 @@
 inky pHAT.
 '''
 
-import os
 import datetime
+import os
+import requests
 import sys
+from subprocess import check_output
+
 from PIL import Image, ImageFont, ImageDraw
 
 import inkyphat
@@ -14,16 +17,29 @@ BLACK = 1
 RED = 2
 
 
+def get_font(name, size):
+    path = os.path.join(os.environ['INKY_DIR'], 'fonts/' + name)
+    font = ImageFont(path, size)
+    return font
+
+
 def show_image(filepath):
     img = Image.open(filepath)
 
-    fnt = ImageFont.truetype('./fonts/SFPixelate.ttf', 9)
+    pixel_font = get_font('SFPixelate.ttf', 9)
+    large_font = get_font('SFPixelate.ttf', 36)
+
     d = ImageDraw.Draw(img)
-    msg = [
-        'Hello, World!',
-        datetime.datetime.now().isoformat(),
-    ]
-    d.multiline_text((10, 10), '\n'.join(msg), font=fnt, fill=WHITE)
+
+    ip_address = check_output(['hostname', '-I']).decode('utf-8').strip()
+    d.text((1, 1), ip_address, font=pixel_font, fill=WHITE)
+
+    time_string = datetime.datetime.now().strftime('%H:%M')
+    d.text((1, 60), time_string, font=large_font, fill=WHITE)
+
+    quote_url = 'https://notify.goude.se/quote'
+    quote = requests.get(quote_url).text
+    d.multiline_text((1, 30), quote, font=pixel_font, fill=WHITE)
 
     inkyphat.set_colour('black')  # 'red' is much slower
     inkyphat.set_border(inkyphat.BLACK)
