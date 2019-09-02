@@ -31,7 +31,8 @@ def show_image(filepath):
     img = Image.open(filepath)
 
     pixel_font = get_font('SFPixelate.ttf', 9)
-    large_font = get_font('SFPixelate.ttf', 36)
+    medium_font = get_font('SFPixelate.ttf', 18)
+    #large_font = get_font('SFPixelate.ttf', 36)
 
     d = ImageDraw.Draw(img)
 
@@ -39,20 +40,22 @@ def show_image(filepath):
     ip_address = check_output(['hostname', '-I']).decode('utf-8').strip()
     info_string = f'{ip_address} / {time_string}'
 
-    d.text((1, 95), info_string, font=pixel_font, fill=WHITE)
     # d.text((1, 65), time_string, font=large_font, fill=WHITE)
 
     quote_url = 'https://notify.goude.se/quote'
     quote = requests.get(quote_url).text
-    chunk_width = 30
-    quote = '\n'.join(chunkstring(quote, chunk_width))  # split string if it doesn't fit
 
     if len(quote) < 80:
-        quote_font = large_font
+        quote_font = medium_font
+        chunk_width = 15
     else:
         quote_font = pixel_font
+        chunk_width = 30
+
+    quote = '\n'.join(chunkstring(quote, chunk_width))  # split string if it doesn't fit
 
     d.multiline_text((1, 1), quote, font=quote_font, fill=WHITE)
+    d.text((1, 95), info_string, font=pixel_font, fill=WHITE)
 
     inkyphat.set_colour('black')  # 'red' is much slower
     inkyphat.set_border(inkyphat.BLACK)
