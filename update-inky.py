@@ -17,6 +17,10 @@ BLACK = 1
 RED = 2
 
 
+def chunkstring(string, length):
+    return (string[0 + i:length + i] for i in range(0, len(string), length))
+
+
 def get_font(name, size):
     path = os.path.join(os.environ['INKY_DIR'], 'fonts/' + name)
     font = ImageFont.truetype(path, size)
@@ -39,6 +43,7 @@ def show_image(filepath):
 
     quote_url = 'https://notify.goude.se/quote'
     quote = requests.get(quote_url).text
+    quote = chunkstring(quote, 38)  # split string if it doesn't fit
     d.multiline_text((1, 30), quote, font=pixel_font, fill=WHITE)
 
     inkyphat.set_colour('black')  # 'red' is much slower
