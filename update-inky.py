@@ -44,10 +44,10 @@ def show_image(filepath):
 
     quote_url = 'https://notify.goude.se/quote'
     quote = requests.get(quote_url).text
-    chunk_width = 20
+    chunk_width = 30
     quote = '\n'.join(chunkstring(quote, chunk_width))  # split string if it doesn't fit
 
-    if len(quote) < 50:
+    if len(quote) < 80:
         quote_font = large_font
     else:
         quote_font = pixel_font
