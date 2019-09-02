@@ -43,7 +43,8 @@ def show_image(filepath):
 
     quote_url = 'https://notify.goude.se/quote'
     quote = requests.get(quote_url).text
-    quote = '\n'.join(chunkstring(quote, 38))  # split string if it doesn't fit
+    chunk_width = 36
+    quote = '\n'.join(chunkstring(quote, chunk_width))  # split string if it doesn't fit
 
     d.multiline_text((1, 1), quote, font=pixel_font, fill=WHITE)
 
