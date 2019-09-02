@@ -9,9 +9,9 @@ from PIL import Image, ImageFont, ImageDraw
 
 import inkyphat
 
-BLACK = (0, 0, 0)
-WHITE = (255, 255, 255)
-RED = (255, 0, 0)
+WHITE = 0
+BLACK = 1
+RED = 2
 
 
 def show_image(filepath):
