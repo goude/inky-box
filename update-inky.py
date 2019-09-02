@@ -19,7 +19,7 @@ RED = 2
 
 def get_font(name, size):
     path = os.path.join(os.environ['INKY_DIR'], 'fonts/' + name)
-    font = ImageFont(path, size)
+    font = ImageFont.truetype(path, size)
     return font
 
 
