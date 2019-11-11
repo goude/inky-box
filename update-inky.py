@@ -27,7 +27,7 @@ def dump_image():
             p = inkyphat.getpixel((x, y))
             im.putpixel(p)
 
-    im.save('test.png')
+    im.save('~/inkypi-test.png')
 
 
 def chunkstring(string, length):
@@ -78,6 +78,7 @@ def main():
     else:
         print("error opening " + filepath)
 
+    dump_image()
 
 if __name__ == "__main__":
     main()
