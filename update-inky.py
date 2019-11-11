@@ -16,6 +16,19 @@ WHITE = 0
 BLACK = 1
 RED = 2
 
+WIDTH=212
+HEIGHT=104
+
+def dump_image():
+    im = Image.new((WIDTH, HEIGHT), 1)
+
+    for x in range(WIDTH):
+        for y in range(HEIGHT):
+            p = inkyphat.getpixel((x, y))
+            im.putpixel(p)
+
+    im.save('test.png')
+
 
 def chunkstring(string, length):
     return (string[0 + i : length + i] for i in range(0, len(string), length))
