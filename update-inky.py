@@ -20,7 +20,7 @@ WIDTH=212
 HEIGHT=104
 
 def dump_image():
-    im = Image.new(1, (WIDTH, HEIGHT))
+    im = Image.new('1', (WIDTH, HEIGHT))
 
     for x in range(WIDTH):
         for y in range(HEIGHT):
