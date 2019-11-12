@@ -26,7 +26,7 @@ def dump_image():
     for x in range(WIDTH):
         for y in range(HEIGHT):
             p = inkyphat.getpixel((x, y))
-            im.putpixel(p, 1)
+            im.putpixel((x, y), p)
 
     im.save("~/inkypi-test.png")
 
