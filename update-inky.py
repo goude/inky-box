@@ -16,18 +16,19 @@ WHITE = 0
 BLACK = 1
 RED = 2
 
-WIDTH=212
-HEIGHT=104
+WIDTH = 212
+HEIGHT = 104
+
 
 def dump_image():
-    im = Image.new('1', (WIDTH, HEIGHT))
+    im = Image.new("1", (WIDTH, HEIGHT))
 
     for x in range(WIDTH):
         for y in range(HEIGHT):
             p = inkyphat.getpixel((x, y))
-            im.putpixel(p)
+            im.putpixel(p, 1)
 
-    im.save('~/inkypi-test.png')
+    im.save("~/inkypi-test.png")
 
 
 def chunkstring(string, length):
@@ -79,6 +80,7 @@ def main():
         print("error opening " + filepath)
 
     dump_image()
+
 
 if __name__ == "__main__":
     main()
