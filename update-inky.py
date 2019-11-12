@@ -28,7 +28,8 @@ def dump_image():
             p = inkyphat.getpixel((x, y))
             im.putpixel((x, y), p)
 
-    im.save("~/inkypi-test.png")
+    filepath = os.path.join(os.environ["INKY_DIR"], "data/inkypi-screen.png")
+    im.save(filepath)
 
 
 def chunkstring(string, length):
